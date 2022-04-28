@@ -1,5 +1,9 @@
 package com.generation.blog.model;
 
+
+import java.time.Instant;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
 @Table(name="post")
@@ -22,6 +29,29 @@ public class Post {
 	
 	@NotNull
 	private String content;
+
+	
+	@CreatedDate
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Instant createdAt;
+
+    @LastModifiedDate
+    @Column(name = "updated_at")
+    private Instant updatedAt;
+    
+    
+    Post() {};
+    
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+
+	public Post(String title, String content) {
+		this.title = title;
+		this.content = content;
+		createdAt = Instant.now();
+		updatedAt = Instant.now();
+	}
 
 	public Long getId() {
 		return id;
@@ -47,5 +77,16 @@ public class Post {
 		this.content = content;
 	}
 	
+	public void setCreatedAt(Instant createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Instant getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Instant updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 	
 }
