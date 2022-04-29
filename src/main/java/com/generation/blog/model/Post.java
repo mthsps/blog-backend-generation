@@ -32,25 +32,19 @@ public class Post {
 
 	
 	@CreatedDate
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Instant createdAt;
+    @Column(name = "created_at", updatable = false)
+    private Instant createdAt = Instant.now();
 
     @LastModifiedDate
     @Column(name = "updated_at")
-    private Instant updatedAt;
+    private Instant updatedAt = Instant.now();
     
     
     Post() {};
     
-	public Instant getCreatedAt() {
-		return createdAt;
-	}
-
 	public Post(String title, String content) {
 		this.title = title;
 		this.content = content;
-		createdAt = Instant.now();
-		updatedAt = Instant.now();
 	}
 
 	public Long getId() {
@@ -75,6 +69,10 @@ public class Post {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	public Instant getCreatedAt() {
+		return createdAt;
 	}
 	
 	public void setCreatedAt(Instant createdAt) {
