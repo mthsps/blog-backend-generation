@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -15,8 +16,10 @@ import javax.validation.constraints.Size;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
-@Table(name="post")
+@Table(name="posts")
 public class Post {
 	
 	@Id
@@ -39,12 +42,17 @@ public class Post {
     @Column(name = "updated_at")
     private Instant updatedAt = Instant.now();
     
+    @ManyToOne
+    @JsonIgnoreProperties("posts")
+    private Theme theme;
     
-    Post() {};
+
+	Post() {};
     
-	public Post(String title, String content) {
+	public Post(String title, String content, Theme theme) {
 		this.title = title;
 		this.content = content;
+		this.theme = theme;
 	}
 
 	public Long getId() {
@@ -87,4 +95,12 @@ public class Post {
 		this.updatedAt = updatedAt;
 	}
 	
+	 public Theme getTheme() {
+			return theme;
+		}
+
+	public void setTheme(Theme theme) {
+			this.theme = theme;
+		}
+
 }
