@@ -5,11 +5,12 @@ import com.generation.blog.model.UserLogin;
 import com.generation.blog.repository.UserRepository;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
+@Service
 public class UserService {
 
     private UserRepository repository;
