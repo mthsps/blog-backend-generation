@@ -1,7 +1,6 @@
 package com.generation.blog.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -20,11 +19,11 @@ public class User {
     private String name;
 
     @NotNull
-    @UniqueElements
+    @Column(unique = true)
     private String username;
     @Email
     @NotNull
-    @UniqueElements
+    @Column(unique = true)
     private String email;
 
     @NotNull
@@ -39,11 +38,11 @@ public class User {
 
     User() {}
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

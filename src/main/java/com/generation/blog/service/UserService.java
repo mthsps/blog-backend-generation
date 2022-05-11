@@ -4,32 +4,35 @@ import com.generation.blog.model.User;
 import com.generation.blog.model.UserLogin;
 import com.generation.blog.repository.UserRepository;
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 @Service
 public class UserService {
 
-    private UserRepository repository;
+    @Autowired
+    private UserRepository userRepository;
 
-    public Optional<User> register (User user) {
+    public Optional<User> register(User user) {
 
-        if (repository.findByUsername(user.getUsername()).isEmpty()) {
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             return Optional.empty();
         }
 
-        user.setPassword(cryptPassword(user.getPassword()));
-        return Optional.of(repository.save(user));
+        user.setPassword(encryptPassword(user.getPassword()));
+        return Optional.of(userRepository.save(user));
 
     }
 
 
     public Optional<UserLogin> authenticateUser (Optional<UserLogin> userLogin) {
 
-        Optional<User> user = repository.findByUsername(userLogin.get().getUsername());
+        Optional<User> user = userRepository.findByUsername(userLogin.get().getUsername());
 
         if (user.isPresent()) {
            if (passwordMatcher(userLogin.get().getPassword(), user.get().getPassword())) {
@@ -46,7 +49,7 @@ public class UserService {
         return Optional.empty();
     }
 
-    private String cryptPassword(String password) {
+    private String encryptPassword(String password) {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -62,7 +65,7 @@ public class UserService {
     private String generateToken(String username, String password) {
 
         String token = username + ":" + password;
-        byte[] tokenBase64 = Base64.encodeBase64(token.getBytes(StandardCharsets.US_ASCII));
+        byte[] tokenBase64 = Base64.encodeBase64(token.getBytes(Charset.forName("US-ASCII")));
         return "Basic " + new String(tokenBase64);
 
     }

@@ -1,4 +1,4 @@
-package com.generation.blog.auth;
+package com.generation.blog.security;
 
 import com.generation.blog.model.User;
 import org.springframework.security.core.GrantedAuthority;

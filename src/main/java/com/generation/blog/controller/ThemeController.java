@@ -33,7 +33,7 @@ public class ThemeController {
 	}
 	
 	@GetMapping("/id")
-	public ResponseEntity<Theme> getById(@PathVariable long id) {
+	public ResponseEntity<Theme> getById(@PathVariable Long id) {
 		return repository.findById(id).map(ResponseEntity::ok)
 				.orElse(ResponseEntity.notFound().build());
 	}
