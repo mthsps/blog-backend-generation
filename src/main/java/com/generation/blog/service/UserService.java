@@ -9,7 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 @Service
@@ -29,8 +28,19 @@ public class UserService {
 
     }
 
+    public Optional<User> update(User user) {
 
-    public Optional<UserLogin> authenticateUser (Optional<UserLogin> userLogin) {
+        if (userRepository.findById(user.getId()).isPresent()) {
+
+            user.setPassword((encryptPassword(user.getPassword())));
+            return Optional.of(userRepository.save(user));
+
+        }
+        return Optional.empty();
+
+    }
+
+    public Optional<UserLogin> authenticate(Optional<UserLogin> userLogin) {
 
         Optional<User> user = userRepository.findByUsername(userLogin.get().getUsername());
 

@@ -32,7 +32,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<UserLogin> login(@RequestBody Optional<UserLogin> user) {
-         return userService.authenticateUser(user).map(ResponseEntity::ok)
+         return userService.authenticate(user).map(ResponseEntity::ok)
                  .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build()); }
 
     @PostMapping("/signup")
@@ -48,9 +48,11 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping
-    public ResponseEntity<User> put(@RequestBody User user) {
-        return ResponseEntity.ok(userRepository.save(user));
+    @PutMapping("/update")
+    public ResponseEntity<User> put(@Valid @RequestBody User user) {
+        return userService.update(user)
+                .map(resp -> ResponseEntity.status(HttpStatus.OK).body(resp))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @DeleteMapping("/{id}")

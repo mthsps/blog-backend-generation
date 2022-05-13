@@ -16,6 +16,13 @@ public class UserLogin {
 
     private String token;
 
+    public UserLogin() {}
+
+    public UserLogin(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }
