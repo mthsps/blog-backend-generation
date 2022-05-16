@@ -1,6 +1,7 @@
 package com.generation.blog.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -18,11 +19,12 @@ public class User {
     @NotNull
     private String name;
 
-    @NotNull
+    @NotNull(message = "You must enter a username and not used before.")
     @Column(unique = true)
     private String username;
-    @Email
-    @NotNull
+    @Email(message = "You must enter a valid e-mail address and not used before.")
+    @NotNull(message = "E-mail is required")
+    @Schema(example = "email@email.com")
     @Column(unique = true)
     private String email;
 
