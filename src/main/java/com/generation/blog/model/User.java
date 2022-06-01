@@ -34,6 +34,8 @@ public class User {
     @Column(name="image_url")
     private String imageUrl;
 
+    private String type;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
     private List<Post> posts;
@@ -96,6 +98,14 @@ public class User {
         this.imageUrl = imageUrl;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public List<Post> getPosts() {
         return posts;
     }
@@ -103,4 +113,6 @@ public class User {
     public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
+
+
 }

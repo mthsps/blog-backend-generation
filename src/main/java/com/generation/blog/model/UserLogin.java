@@ -13,6 +13,7 @@ public class UserLogin {
     private String password;
 
     private String imageUrl;
+    private String type;
 
     private String token;
 
@@ -69,6 +70,14 @@ public class UserLogin {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getToken() {
