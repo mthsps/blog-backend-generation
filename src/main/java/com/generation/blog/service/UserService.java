@@ -48,6 +48,7 @@ public class UserService {
            if (passwordMatcher(userLogin.get().getPassword(), user.get().getPassword())) {
                userLogin.get().setId(user.get().getId());
                userLogin.get().setName(user.get().getName());
+               userLogin.get().setEmail(user.get().getEmail());
                userLogin.get().setImageUrl(user.get().getImageUrl());
                userLogin.get().setType(user.get().getType());
                userLogin.get().setToken(generateToken(userLogin.get().getUsername(), userLogin.get().getPassword()));

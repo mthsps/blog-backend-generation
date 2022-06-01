@@ -50,7 +50,7 @@ public class Post {
 	@JsonIgnoreProperties("posts")
 	private User user;
 
-	Post() {};
+	public Post() {};
     
 	public Post(String title, String content, Theme theme) {
 		this.title = title;
