@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.CreatedDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -24,8 +25,9 @@ public class Theme {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotNull
+
+	@NotNull(message = "You must enter a description not used before")
+	@Column(unique = true)
 	private String description;
 	
 	@OneToMany(mappedBy = "theme", cascade = CascadeType.ALL)
@@ -36,7 +38,7 @@ public class Theme {
     @Column(name = "created_at", updatable = false)
     private Instant createdAt = Instant.now();
 	
-	Theme() {}
+	public Theme() {}
 	
 	public Theme(@NotNull String description) {
 		this.description = description;
