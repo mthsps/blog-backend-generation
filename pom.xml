@@ -11,8 +11,8 @@
 	<groupId>com.generation</groupId>
 	<artifactId>blog</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Personal blog</name>
-	<description>Personal blog project to be used as a tool for learning the Spring Boot framework during Module II and III of the Generation Brazil bootcamp.</description>
+	<name>Blog</name>
+	<description>Working blog project to be used as a tool for learning the Spring Boot framework during Module II and III of the Generation Brazil bootcamp.</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

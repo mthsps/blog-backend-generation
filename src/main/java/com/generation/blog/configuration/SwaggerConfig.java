@@ -18,8 +18,8 @@ public class SwaggerConfig {
     public OpenAPI createOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Personal blog project")
-                        .description("Personal blog project to be used as a tool for learning the Spring framework during Module II of the Generation Brazil bootcamp")
+                        .title("Blog project")
+                        .description("Blog project to be used as a tool for learning the Spring framework during Module II of the Generation Brazil bootcamp")
                         .version("v0.0.1")
                         .license(new License()
                                 .name("Attribution-NonCommercial 4.0 International")
@@ -29,7 +29,7 @@ public class SwaggerConfig {
                                 .url("https://github.com/mthsps")))
                         .externalDocs(new ExternalDocumentation()
                                 .description("GitHub")
-                                .url("https://github.com/mthsps/personal-blog-project"));
+                                .url("https://github.com/mthsps/blog-backend-generation"));
 
     }
 
